@@ -1,0 +1,38 @@
+{
+  "name": "pokedex_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "serve": "node server.js",
+    "start": "webpack --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zombispormedio/pokedex_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zombispormedio/pokedex_app/issues"
+  },
+  "homepage": "https://github.com/Zombispormedio/pokedex_app#readme",
+  "dependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.0",
+    "babel-preset-react-app": "^2.1.0",
+    "babili": "0.0.11",
+    "babili-webpack-plugin": "0.0.10",
+    "connect": "^3.5.1",
+    "css-loader": "^0.26.1",
+    "node-sass": "^4.5.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "sass-loader": "^6.0.0",
+    "serve-static": "^1.11.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.2.1"
+  }
+}
