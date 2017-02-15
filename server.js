@@ -15,4 +15,4 @@ app.listen(port, () => {
     console.log(`Server running on ${port}`);
 });
 
-// "postinstall": "webpack --config webpack.config.prod.js",
+// "postinstall": "webpack --config webpack.config.js",

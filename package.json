@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "webpack --config webpack.config.js",
     "build": "webpack",
     "serve": "node server.js",
     "start": "webpack --watch",
