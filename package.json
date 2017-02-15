@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-	"postinstall": "webpack --config webpack.config.prod.js"
+	"postinstall": "webpack --config webpack.config.prod.js",
     "serve": "node server.js",
     "start": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
