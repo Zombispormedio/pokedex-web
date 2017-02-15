@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
 
 class PokeProfile extends Component{
     render(){
@@ -8,5 +9,9 @@ class PokeProfile extends Component{
     }
 }
 
+function reduxTransform(state) {
+  return state
+}
 
-export default PokeProfile
+
+export default connect(reduxTransform)(PokeProfile)

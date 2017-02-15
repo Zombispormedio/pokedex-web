@@ -14,3 +14,5 @@ app.get('*', function (request, response){
 app.listen(port, () => {
     console.log(`Server running on ${port}`);
 });
+
+// "postinstall": "webpack --config webpack.config.prod.js",

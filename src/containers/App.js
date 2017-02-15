@@ -1,12 +1,17 @@
 import React, {Component} from 'react'
+import PokeAppbar from '../components/PokeAppbar'
+import { Layout, Panel} from 'react-toolbox';
+
 
 class App extends Component{
     render(){
         return (
-        <div>
-            <h1>Hello Everybody</h1>
+        <Layout>
+           <Panel>
+            <PokeAppbar/>
             {this.props.children}
-        </div>
+            </Panel>
+        </Layout>
         )
     }
 }

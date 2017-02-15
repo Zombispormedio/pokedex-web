@@ -1,0 +1,11 @@
+.content{
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.8rem;
+}
+
+.fixed-action-btn{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}

@@ -1,42 +1,48 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 
-import {fetchPokemons} from '../actions/pokemonActions'
+import {Button} from 'react-toolbox';
+
+import PokeList from '../components/PokeList'
+import Content from '../components/Content'
+import utils from '../theme/utils.scss';
 
 
 class PokeManiac extends Component{
 
-componentDidMount() {
-    const { dispatch} = this.props
-    dispatch(fetchPokemons(0))
+  constructor(props) {
+    super(props);
+    this.goToCreate = this.goToCreate.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-
+  goToCreate() {
+    browserHistory.push('/pokemon/create')
   }
-
-    render(){
-        const {isFetching} = this.props
+  
+  render(){
         return (
-        <h1>{isFetching.toString()}</h1>
+        <Content>
+          <PokeList/>
+          <div className={utils.fixedActionBtn}>
+            <Button icon='add' onClick={this.goToCreate} floating accent>
+            </Button>
+          </div>
+        </Content>
         )
     }
 }
 
-function mapStateToProps(state) {
+function reduxTransform(state) {
   const { pokemons } = state
   const {
     isFetching,
-    lastUpdated,
-    items
   } = pokemons
 
   return {
-    items,
-    isFetching,
-    lastUpdated
+    isFetching
   }
 }
 
 
-export default connect(mapStateToProps)(PokeManiac)
+export default connect(reduxTransform)(PokeManiac)

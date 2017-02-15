@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
 
 class PokeEditor extends Component{
     render(){
@@ -9,4 +10,9 @@ class PokeEditor extends Component{
 }
 
 
-export default PokeEditor
+function reduxTransform(state) {
+  return state
+}
+
+
+export default connect(reduxTransform)(PokeEditor)
