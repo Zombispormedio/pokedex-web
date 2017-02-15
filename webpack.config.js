@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
     context: __dirname,
-    entry: ["./src/app.js"],
+    entry: ["./src/index.js"],
     output: {
         path: path.resolve(__dirname, 'public/build'),
         publicPath: '/public/build',
