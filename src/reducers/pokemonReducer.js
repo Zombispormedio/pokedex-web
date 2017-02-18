@@ -1,19 +1,29 @@
-import {REQUEST_POKEMONS, RECEIVE_POKEMONS} from '../config/actionTypes'
+import {REQUEST_POKEMONS, NEXT_POKEMONS} from '../config/actionTypes'
+import {createReducer, concat} from './reducerUtils'
 
-export function pokemons(state = {
+const initState = {
   isFetching: false,
-  items: {}
-}, action) {
-  switch (action.type) {
-    case REQUEST_POKEMONS:
-      return { ...state, isFetching: true}
-    case RECEIVE_POKEMONS:
-      return  {...state, 
-        isFetching: false,
-        items: action.pokemons,
-        lastUpdated: action.receivedAt
-      }
-    default:
-      return state
-  }
+  items: [],
+  page: 0
 }
+
+function requestPokemon(state){
+  return { ...state, isFetching: true}
+}
+
+function nextPokemons(state, action){
+  const pokemons =action.pokemons;
+  return {...state, 
+        isFetching: false,
+        items: state.items.concat(pokemons),
+        lastUpdated: action.receivedAt, 
+        page: action.page
+      }
+}
+
+const pokemonReducer = createReducer(initState, {
+    [REQUEST_POKEMONS]: requestPokemon, 
+    [NEXT_POKEMONS]: nextPokemons
+})
+
+export default pokemonReducer

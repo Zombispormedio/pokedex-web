@@ -1,4 +1,10 @@
-import {REQUEST_POKEMONS, RECEIVE_POKEMONS} from '../config/actionTypes'
+import {
+  REQUEST_POKEMONS,
+  NEXT_POKEMONS
+} from '../config/actionTypes'
+import Api from '../config/Api'
+
+const scope = "pokemons"
 
 function requestPokemons(page) {
   return {
@@ -7,13 +13,11 @@ function requestPokemons(page) {
   }
 }
 
-function receivePokemons(page, json) {
+function nextPokemons(page, json) {
   return {
-    type: RECEIVE_POKEMONS,
+    type: NEXT_POKEMONS,
     page,
-    pokemons: json.data.reduce((memo, item) => { 
-      return {...memo, [item.id]: item}
-    }, {}),
+    pokemons: json.data,
     receivedAt: Date.now()
   }
 }
@@ -21,9 +25,14 @@ function receivePokemons(page, json) {
 export function fetchPokemons(page) {
   return dispatch => {
     dispatch(requestPokemons(page))
-    return fetch(`http://pokeapi.co/api/v2/pokemon/1`)
+    return Api.get(`${scope}?p=${page}`)
       .then(json => {
-        dispatch(receivePokemons(page, {data: [{id: 5, name: "hello"}]}));
+        dispatch(nextPokemons(page, json));
+      })
+      .catch(res => {
+        dispatch(nextPokemons(page, {
+          data: []
+        }));
       })
   }
 }

@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-import {pokemons}   from './pokemonReducer'
+import pokemonReducer   from './pokemonReducer'
 
 const rootReducer = combineReducers({
     routing: routerReducer,
-    pokemons
+    pokemons: pokemonReducer
 })
 
 export default rootReducer
