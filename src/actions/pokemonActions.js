@@ -1,4 +1,4 @@
-import {REQUEST_POKEMONS, RECEIVE_POKEMONS} from './actionTypes'
+import {REQUEST_POKEMONS, RECEIVE_POKEMONS} from '../config/actionTypes'
 
 function requestPokemons(page) {
   return {

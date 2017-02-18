@@ -1,4 +1,4 @@
-import {REQUEST_POKEMONS, RECEIVE_POKEMONS} from '../actions/actionTypes'
+import {REQUEST_POKEMONS, RECEIVE_POKEMONS} from '../config/actionTypes'
 
 export function pokemons(state = {
   isFetching: false,
