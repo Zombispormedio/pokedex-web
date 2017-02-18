@@ -29,7 +29,7 @@ export function fetchPokemons(page) {
       .then(json => {
         dispatch(nextPokemons(page, json));
       })
-      .catch(res => {
+      .catch(() => {
         dispatch(nextPokemons(page, {
           data: []
         }));

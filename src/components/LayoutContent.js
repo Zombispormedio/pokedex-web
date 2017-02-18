@@ -1,15 +1,10 @@
-import React, { Component } from 'react'
-import utils from '../theme/utils.scss';
+import React from 'react'
+import styles from '../theme/styles.scss';
 
-class LayoutContent extends Component{
-
-    render(){
-        return (
-            <div className={utils.content}>
-                {this.props.children}
-            </div>
-        )
-    }
-}
+const LayoutContent = (props)=>(
+    <div className={styles.content}>
+        {props.children}
+    </div>
+)
 
 export default LayoutContent

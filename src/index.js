@@ -7,7 +7,7 @@ import 'react-toolbox/lib/commons.scss';
 
 ReactDom.render(
     <Root/>,
-    document.getElementById("mount")
+    document.getElementById("app")
 )
 
 
