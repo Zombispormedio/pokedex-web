@@ -1,16 +1,17 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 
-import {IconButton, Avatar, Ripple} from 'react-toolbox';
+import {Avatar} from 'react-toolbox';
 
 import randomColor from 'random-material-color'
+import {ripple} from 'css-ripple-effect/dist/ripple'
+
+import PokeFavButton from '../containers/PokeFavButton'
 
 import styles from '../theme/styles.scss';
 
-import {ripple} from 'css-ripple-effect/dist/ripple'
-
 
 const PokeItem = ({pokemon, onClick}) =>{
-    const {name, sprite, fav} = pokemon
+    const {id, name, sprite, fav} = pokemon
 
     let avatarData = {
         style: {backgroundColor: 'transparent'}
@@ -31,11 +32,15 @@ const PokeItem = ({pokemon, onClick}) =>{
                 <Avatar {...avatarData}/>
                 <div className={styles.itemCaption}>{pokemon.name}</div>
             </a>
-            <IconButton className={styles.itemFav} icon='favorite' accent />
+           <PokeFavButton className={styles.itemFav} fav={fav} pokemonId={id}/>
         </div>
     )
-
 }
 
+
+PokeItem.propTypes = {
+  pokemon: React.PropTypes.object,
+  onClick: PropTypes.func
+};
 
 export default PokeItem

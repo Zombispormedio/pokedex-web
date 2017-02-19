@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 
 import {ProgressBar, FontIcon} from 'react-toolbox';
@@ -18,5 +18,10 @@ function mapStateToProps(state) {
   const {isFetching} =state.pokemons
   return {isFetching}
 }
+
+Loader.propTypes = {
+  isFetching: PropTypes.bool
+};
+
 
 export default connect(mapStateToProps)(Loader)

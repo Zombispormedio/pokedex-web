@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import React, {PropTypes, Component} from 'react'
 import {connect} from 'react-redux'
 
-import {fetchPokemons} from '../actions/pokemonActions'
+import {fetchPokemons} from '../actions/loadPokemonAction'
 
 import ItemList from '../components/ItemList'
 
@@ -39,7 +39,6 @@ class PokeList extends Component{
 }
 
 
-
 function mapStateToProps(state) {
   const {items, page, isFetching} = state.pokemons
   return { page, items, isFetching}
@@ -52,5 +51,14 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 }
+
+PokeList.propTypes = {
+  onPokemonClick: PropTypes.func,
+  fetchPokemons: PropTypes.func,
+  items: PropTypes.arrayOf(React.PropTypes.object),
+  page: PropTypes.number,
+  isFetching: PropTypes.bool
+};
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokeList)

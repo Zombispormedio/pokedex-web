@@ -1,5 +1,6 @@
-import {REQUEST_POKEMONS, NEXT_POKEMONS} from '../config/actionTypes'
-import {createReducer, mergeArrays} from './reducerUtils'
+import {REQUEST_POKEMONS, RECEIVE_POKEMONS,
+   REQUEST_FAV_POKEMON, RECEIVE_FAV_POKEMON} from '../config/actionTypes'
+import {createReducer, mergeArrays, updateArrayByCallback, updateArrayByItem} from './reducerUtils'
 
 const initState = {
   isFetching: false,
@@ -17,19 +18,30 @@ function nextPokemons(state, action){
         isFetching: false,
         items: mergeArrays(state.items, pokemons),
         lastUpdated: action.receivedAt, 
-        page: resolvePage(state, action)
+        page: action.pokemons.length==0? state.page : action.page
       }
 }
 
-function resolvePage(state, action){
-  return action.pokemons.length==0?
-    state.page 
-    : action.page
+function requestFavPokemon(state, action){
+  return { ...state, 
+        items: updateArrayByCallback(state.items, action.pokemonId, (item) => {
+          return {...item, fav: !item.fav}
+        })
+    }
 }
+
+function receiveFavPokemon(state, action){
+  return { ...state, 
+        items: updateArrayByItem(state.items, action.pokemon)
+    }
+}
+
 
 const pokemonReducer = createReducer(initState, {
     [REQUEST_POKEMONS]: requestPokemon, 
-    [NEXT_POKEMONS]: nextPokemons
+    [RECEIVE_POKEMONS]: nextPokemons,
+    [REQUEST_FAV_POKEMON]: requestFavPokemon, 
+    [RECEIVE_FAV_POKEMON]: receiveFavPokemon
 })
 
 export default pokemonReducer
