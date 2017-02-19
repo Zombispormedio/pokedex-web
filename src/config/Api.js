@@ -40,7 +40,6 @@ const saveAuthorization = (headers) => {
 const Request = function(pathname, req){
     return fetch(`${Hostname()}/${pathname}`, req).then(function (res) {
         saveAuthorization(res.headers)
-        console.log(res)
         return res.json()
     })
 }

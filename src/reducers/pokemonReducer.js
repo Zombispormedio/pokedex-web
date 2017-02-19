@@ -1,5 +1,5 @@
 import {REQUEST_POKEMONS, NEXT_POKEMONS} from '../config/actionTypes'
-import {createReducer, concat} from './reducerUtils'
+import {createReducer, mergeArrays} from './reducerUtils'
 
 const initState = {
   isFetching: false,
@@ -15,10 +15,16 @@ function nextPokemons(state, action){
   const pokemons =action.pokemons;
   return {...state, 
         isFetching: false,
-        items: state.items.concat(pokemons),
+        items: mergeArrays(state.items, pokemons),
         lastUpdated: action.receivedAt, 
-        page: action.page
+        page: resolvePage(state, action)
       }
+}
+
+function resolvePage(state, action){
+  return action.pokemons.length==0?
+    state.page 
+    : action.page
 }
 
 const pokemonReducer = createReducer(initState, {

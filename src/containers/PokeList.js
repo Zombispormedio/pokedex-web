@@ -1,45 +1,54 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {ProgressBar} from 'react-toolbox';
-
 import {fetchPokemons} from '../actions/pokemonActions'
 
 import ItemList from '../components/ItemList'
 
-
 class PokeList extends Component{
     
     componentDidMount() {
-        const {fetchPokemons, page} = this.props
-        fetchPokemons(page)
+        this.setupInfinityScroll();
+        this.loadMore();
     }
-     onPokemonClick(id){
-        console.log(id);
-     }
-    
+
+    setupInfinityScroll(){
+          const loadMore = this.loadMore.bind(this)
+          window.onscroll = function(){
+            let scrollTop = document.body.scrollTop
+            let limit = document.body.scrollHeight - window.innerHeight
+            if(scrollTop == limit){
+                loadMore()
+            }
+        };
+    }
+
+    loadMore(){
+        const {page, fetchPokemons} = this.props;
+        fetchPokemons(page+1);
+    }
+
     render(){
-        const {items, isFetching} = this.props
-        if(isFetching){
-            return <ProgressBar type="circular" mode="indeterminate" />
-        }else if(items.length==0){
+        const {items, isFetching, onPokemonClick} = this.props
+        if(items.length==0 && !isFetching){
             return <p>No hay ningún Pokémon añadido, ¿a qué esperas?</p>
         }else{
-
-           return <ItemList items={items} onItemClick={this.onPokemonClick}/>
+           return <ItemList items={items} onItemClick={onPokemonClick}/>
         }
     }
 }
 
+
+
 function mapStateToProps(state) {
-  const {isFetching, items, page} = state.pokemons
-  return {isFetching, page, items}
+  const {items, page, isFetching} = state.pokemons
+  return { page, items, isFetching}
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPokemons: (page) =>{
-        dispatch(fetchPokemons(page+1))
+        dispatch(fetchPokemons(page))
     }
   }
 }

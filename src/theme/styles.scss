@@ -3,7 +3,8 @@
     flex: 1;
     overflow-y: auto;
     padding: 1.8rem;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 6.4rem;
 }
 
@@ -17,7 +18,6 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    margin-bottom: 10%;
     @media only screen and (max-width: 750px) {
         width: 100%;
     }
@@ -36,6 +36,7 @@
     flex-direction: row;
     order: 1;
     flex-grow: 2;
+    cursor: pointer;
 }
 
 .item-caption {
@@ -60,4 +61,8 @@
     span {
         font-size: 3rem !important;
     }
+}
+
+.bottom-list{
+    height: 6rem;
 }

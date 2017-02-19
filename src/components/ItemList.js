@@ -21,6 +21,11 @@ const ItemList = ({items, onItemClick})=>{
 }
 
 
+ItemList.propTypes = {
+  items: PropTypes.arrayOf(React.PropTypes.object),
+  onClick: PropTypes.func
+};
+
 
 
 export default ItemList
