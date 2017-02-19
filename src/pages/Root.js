@@ -3,13 +3,13 @@ import {Provider} from 'react-redux'
 import {Router, Route, IndexRoute, browserHistory} from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
-import configureStore from './configureStore'
+import configureStore from '../config/configureStore'
 
-import App from './pages/App'
-import PokeManiac from './pages/PokeManiac'
-import PokeCreator from './pages/PokeCreator'
-import PokeProfile from './pages/PokeProfile'
-import PokeEditor from './pages/PokeEditor'
+import App from './App'
+import PokeManiac from './PokeManiac'
+import PokeCreator from './PokeCreator'
+import PokeProfile from './PokeProfile'
+import PokeEditor from './PokeEditor'
 
 const store = configureStore()
 
