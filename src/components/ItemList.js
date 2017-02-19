@@ -1,16 +1,16 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 
 import PokeItem from '../components/PokeItem'
 
 import styles from '../theme/styles.scss';
 
-const ItemList = ({items, onItemClick, onItemFav})=>{
+
+const ItemList = ({items, onItemClick})=>{
     const list = items.map((p)=>
         <PokeItem 
             key={p.id.toString()} 
             pokemon={p} 
             onClick={() => onItemClick(p.id)}
-            onFav={() => onItemFav(p.id)}
         />
     )
     return (
@@ -19,6 +19,7 @@ const ItemList = ({items, onItemClick, onItemFav})=>{
         </div>
     )
 }
+
 
 
 

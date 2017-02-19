@@ -9,4 +9,10 @@ const FloatingActionButton = ({icon, onClick}) => (
         <Button icon={icon} onClick={onClick} floating accent/>
     </div>
 )
+
+FloatingActionButton.propTypes = {
+  icon: PropTypes.string,
+  onClick: PropTypes.func
+};
+
 export default FloatingActionButton

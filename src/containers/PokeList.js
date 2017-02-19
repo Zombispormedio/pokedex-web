@@ -14,15 +14,19 @@ class PokeList extends Component{
         const {fetchPokemons, page} = this.props
         fetchPokemons(page)
     }
+     onPokemonClick(id){
+        console.log(id);
+     }
     
     render(){
-        const {items, isFetching, onPokemonClick, onPokemonFav} = this.props
+        const {items, isFetching} = this.props
         if(isFetching){
             return <ProgressBar type="circular" mode="indeterminate" />
         }else if(items.length==0){
             return <p>No hay ningún Pokémon añadido, ¿a qué esperas?</p>
         }else{
-           return <ItemList items={items} onItemClick={onPokemonClick} onItemFav={onPokemonFav}/>
+
+           return <ItemList items={items} onItemClick={this.onPokemonClick}/>
         }
     }
 }
@@ -34,12 +38,6 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPokemonClick: (id) => {
-      
-    },
-     onPokemonFav: (id) => {
-      
-    }, 
     fetchPokemons: (page) =>{
         dispatch(fetchPokemons(page+1))
     }

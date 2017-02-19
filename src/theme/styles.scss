@@ -1,4 +1,4 @@
-.content{
+.content {
     display: flex;
     flex: 1;
     overflow-y: auto;
@@ -7,29 +7,30 @@
     margin-top: 6.4rem;
 }
 
-.fixed-action-btn{
+.fixed-action-btn {
     position: fixed;
     bottom: 30px;
     right: 30px;
 }
 
-.item-list{
+.item-list {
     display: flex;
     flex-direction: column;
     width: 50%;
+    margin-bottom: 10%;
     @media only screen and (max-width: 750px) {
         width: 100%;
     }
 }
 
-.item{
+.item {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 2%;
 }
 
-.item-title{
+.item-title {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -37,16 +38,26 @@
     flex-grow: 2;
 }
 
-.item-caption{
-    font-size: 1em;
+.item-caption {
+    font-size: 1.5em;
 }
 
 .item-avatar{
-    font-size: 2em;
-    margin-right: 1.5%;
+    margin-right: 2rem;
+    margin-left: 0.5rem;
 }
 
-.item-fav{
-    font-size: 2em;
+.item-avatar-sprite {
+    width: 5rem;
+    height: 5rem;
+    margin-right: 1.5rem;
+}
+
+.item-fav {
     order: 2;
+    width: 6rem;
+    height: 6rem !important;
+    span {
+        font-size: 3rem !important;
+    }
 }
