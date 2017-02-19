@@ -18,7 +18,7 @@ class SnackbarAlertBox extends Component{
           action='Okay'
           label={message}
           active={active}
-          timeout={2000}
+          timeout={2500}
           onClick={handle}
           onTimeout={handle}
           ref='snackbar'
