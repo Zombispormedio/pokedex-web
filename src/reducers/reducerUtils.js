@@ -1,4 +1,4 @@
-const R = require('ramda')
+import {findIndex, update, propEq, merge, sortBy, ascend, prop, sortWith} from 'ramda'
 
 export function createReducer(initialState, handlers){
     return function reducer(state=initialState, action){
@@ -11,30 +11,36 @@ export function createReducer(initialState, handlers){
 }
 
 export function updateArrayByCallback(array, itemId, transform){
-    const index = R.findIndex(R.propEq("id", itemId))(array)
+    const index = findIndex(propEq("id", itemId))(array)
     const updatedItem = transform(array[index])
-    return R.update(index, updatedItem, array)
+    return update(index, updatedItem, array)
 }
 
 export function updateArrayByItem(array, item){
-    const index = R.findIndex(R.propEq("id", item.id))(array)
-    return R.update(index, item, array)
+    const index = findIndex(propEq("id", item.id))(array)
+    return update(index, item, array)
 }
 
 export function updateObject(oldObject, newValues) {
-    return R.merge(oldObject, newValues)
+    return merge(oldObject, newValues)
 }
 
 
 export function mergeArrays(array, values) {
     return values.reduce((memo, item) => {
-        const index = R.findIndex(R.propEq("id", item.id))(memo)
+        const index = findIndex(propEq("id", item.id))(memo)
 
         if(index > -1){
-            return R.update(index, item, memo)
+            return update(index, item, memo)
         }
         
         memo.push(item)
         return memo
     }, array)
+}
+
+export function orderByFav(list){
+    const fn = (item) => item.fav == true
+    const sorted = sortWith([ascend(prop('insertedAt')), ], list)
+    return sortBy( a => fn(a)? 1 : 2 , sorted)
 }
