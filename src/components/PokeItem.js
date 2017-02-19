@@ -17,13 +17,13 @@ const PokeItem = ({pokemon, onClick}) =>{
         style: {backgroundColor: 'transparent'}
     }
 
-    if(sprite.length == 0){
+    if(sprite != null && sprite.length > 0){
+        avatarData.className = styles.itemAvatarSprite;
+        avatarData.image = pokemon.sprite
+    } else {
         avatarData.title = name
         avatarData.className = styles.itemAvatar;
         avatarData.style.backgroundColor = randomColor.getColor({ text: pokemon.name })
-    } else {
-        avatarData.className = styles.itemAvatarSprite;
-        avatarData.image = pokemon.sprite
     }
 
     return (
