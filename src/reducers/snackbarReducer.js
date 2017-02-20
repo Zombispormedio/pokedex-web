@@ -1,5 +1,5 @@
 import {SHOW_SNACKBAR, CLOSE_SNACKBAR} from '../config/actionTypes'
-import {createReducer} from './reducerUtils'
+import {createReducer} from '../lib/reducerUtils'
 
 const initState = {
   active: false,

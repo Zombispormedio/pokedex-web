@@ -22,8 +22,7 @@ class PokeCreateForm extends Component {
 
     onSubmit(data){
         this.model = {...data}
-        const {createPokemon, onFinish} = this.props;
-        console.log(onFinish)
+        const {createPokemon, onFinish} = this.props
         createPokemon(data, onFinish)
     }
 

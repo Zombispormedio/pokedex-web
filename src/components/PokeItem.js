@@ -2,35 +2,25 @@ import React, {PropTypes} from 'react'
 
 import {Avatar} from 'react-toolbox';
 
-import randomColor from 'random-material-color'
+
 import {ripple} from 'css-ripple-effect/dist/ripple'
 
 import PokeFavButton from '../containers/PokeFavButton'
 
 import styles from '../theme/styles.scss';
+import {AvatarData} from '../lib/utils';
 
 
 const PokeItem = ({pokemon, onClick}) =>{
-    const {id, name, sprite, fav} = pokemon
+    const {id, name, fav} = pokemon
 
-    let avatarData = {
-        style: {backgroundColor: 'transparent'}
-    }
-
-    if(sprite != null && sprite.length > 0){
-        avatarData.className = styles.itemAvatarSprite;
-        avatarData.image = pokemon.sprite
-    } else {
-        avatarData.title = name
-        avatarData.className = styles.itemAvatar;
-        avatarData.style.backgroundColor = randomColor.getColor({ text: pokemon.name })
-    }
+    let avatarData = AvatarData(pokemon)
 
     return (
         <div className={styles.item}>
             <a className={[styles.itemTitle, ripple].join(' ')} onClick={onClick} >
                 <Avatar {...avatarData}/>
-                <div className={styles.itemCaption}>{pokemon.name}</div>
+                <div className={styles.itemCaption}>{name}</div>
             </a>
            <PokeFavButton className={styles.itemFav} fav={fav} pokemonId={id}/>
         </div>
@@ -39,7 +29,20 @@ const PokeItem = ({pokemon, onClick}) =>{
 
 
 PokeItem.propTypes = {
-  pokemon: React.PropTypes.object,
+  pokemon: PropTypes.shape({
+        id: PropTypes.id, 
+        name: PropTypes.string,
+        description: PropTypes.string, 
+        type1: PropTypes.shape({
+            id: PropTypes.number,
+            name: PropTypes.string
+        }), 
+        type2: PropTypes.shape({
+            id: PropTypes.number,
+            name: PropTypes.string
+        }), 
+        evolution: PropTypes.string
+    }), 
   onClick: PropTypes.func
 };
 

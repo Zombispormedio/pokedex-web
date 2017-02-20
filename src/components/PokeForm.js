@@ -4,7 +4,7 @@ import {Input, Button, Card} from 'react-toolbox'
 
 import TypesDropdown from '../containers/TypesDropdown'
 
-import Validator from '../config/Validator'
+import Validator from '../lib/Validator'
 
 import styles from '../theme/styles.scss';
 

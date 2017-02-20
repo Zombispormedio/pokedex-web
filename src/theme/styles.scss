@@ -46,7 +46,7 @@
     font-size: 1.5em;
 }
 
-.item-avatar{
+.item-avatar {
     margin-right: 2rem;
     margin-left: 0.5rem;
 }
@@ -66,45 +66,87 @@
     }
 }
 
-.bottom-list{
+.bottom-list {
     height: 6rem;
 }
 
-.child-toolbar{
-    button span{
+.child-toolbar {
+    button span {
         font-size: 4rem !important;
     }
 }
 
-.divider{
+.divider {
     display: block;
     height: 1px;
-    background-color: rgba(0,0,0,.12);
+    background-color: rgba(0, 0, 0, .12);
 }
 
-.types-dropdown-bar{
+.types-dropdown-bar {
     display: flex;
     flex-direction: row;
     align-content: center;
     width: 60rem;
-    div{
+    div {
         margin-left: 2rem;
         margin-right: 2rem;
     }
 }
 
-.form{
+.form {
     display: flex;
     flex-direction: column;
     padding-left: 2%;
     padding-right: 2%;
     height: 55rem;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
     border-radius: .2rem;
-    button{
+    button {
         margin-top: 5rem;
     }
-    div label{
+    div label {
         color: rgba(0, 0, 0, 0.6);
     }
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2%;
+    padding-right: 2%;
+    align-items: center;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    border-radius: .2rem;
+    margin-top: 4rem;
+    .item-avatar-sprite,
+    .item-avatar {
+        margin-top: 2rem;
+    }
+    .profile-evolution {
+        margin-top: 1rem;
+    }
+    .profile-description {
+        text-align: justify;
+        width: 30rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    .profile-fav {
+        width: 6rem;
+        height: 6rem !important;
+        span {
+            font-size: 3rem !important;
+        }
+    }
+}
+
+.types-container {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+.types {
+    padding: 1.5rem;
+    color: white;
 }

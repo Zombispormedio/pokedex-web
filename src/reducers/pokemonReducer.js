@@ -4,14 +4,16 @@ import {
   REQUEST_FAV_POKEMON,
   RECEIVE_FAV_POKEMON,
   REQUEST_CREATE_POKEMON,
-  RECEIVE_CREATE_POKEMON
+  RECEIVE_CREATE_POKEMON,
+  REQUEST_SHOW_POKEMON,
+  RECEIVE_SHOW_POKEMON
 } from '../config/actionTypes'
 import {
   createReducer,
   mergeArrays,
   updateArrayByCallback,
   updateArrayByItem
-} from './reducerUtils'
+} from '../lib/reducerUtils'
 
 const initState = {
   isFetching: false,
@@ -29,13 +31,11 @@ function requestPokemons(state) {
 
 function receivePokemons(state, {
   pokemons,
-  receivedAt,
   page
 }) {
   return { ...state,
     isFetching: false,
     items: mergeArrays(state.items, pokemons),
-    lastUpdated: receivedAt,
     page: pokemons.length == 0 ? state.page : page
   }
 }
@@ -82,6 +82,28 @@ function receiveCreatePokemon(state, {
       isSubmiting: false
     }
   }
+}
+
+function requestShowPokemon(state) {
+  return { ...state,
+    isFetching: true
+  }
+}
+
+function receiveShowPokemon(state, {
+  pokemon,
+  error
+}) {
+  if (error == void 0) {
+    return { ...state,
+      isFetching: false,
+      items: mergeArrays(state.items, [pokemon])
+    }
+  } else {
+    return { ...state,
+      isFetching: false
+    }
+  }
 
 }
 
@@ -93,6 +115,8 @@ const pokemonReducer = createReducer(initState, {
   [RECEIVE_FAV_POKEMON]: receiveFavPokemon,
   [REQUEST_CREATE_POKEMON]: requestCreatePokemon,
   [RECEIVE_CREATE_POKEMON]: receiveCreatePokemon,
+  [REQUEST_SHOW_POKEMON]: requestShowPokemon,
+  [RECEIVE_SHOW_POKEMON]: receiveShowPokemon,
 })
 
 export default pokemonReducer

@@ -1,5 +1,5 @@
 import {REQUEST_TYPES, RECEIVE_TYPES} from '../config/actionTypes'
-import {createReducer} from './reducerUtils'
+import {createReducer} from '../lib/reducerUtils'
 
 const initState = {
     isFetching: false,

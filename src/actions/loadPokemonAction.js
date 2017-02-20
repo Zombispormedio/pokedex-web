@@ -1,4 +1,9 @@
-import { REQUEST_POKEMONS,RECEIVE_POKEMONS} from '../config/actionTypes'
+import {
+  REQUEST_POKEMONS,
+  RECEIVE_POKEMONS,
+  REQUEST_SHOW_POKEMON,
+  RECEIVE_SHOW_POKEMON
+} from '../config/actionTypes'
 import Api from '../config/Api'
 
 const scope = "pokemons"
@@ -30,6 +35,37 @@ export function fetchPokemons(page) {
         dispatch(nextPokemons(page, {
           data: []
         }));
+      })
+  }
+}
+
+
+function requestPokemonById(id) {
+  return {
+    type: REQUEST_SHOW_POKEMON,
+    id
+  }
+}
+
+function receivePokemonById(error, data) {
+  return {
+    type: RECEIVE_SHOW_POKEMON,
+    pokemon: data,
+    error: error
+  }
+}
+
+
+export function fetchPokemonById(id, errorCb) {
+  return dispatch => {
+    dispatch(requestPokemonById(id))
+    return Api.get(`${scope}/${id}`)
+      .then(json => {
+        if (json.errors != void 0) {
+          dispatch(receivePokemonById(json.errors, json.data));
+          return errorCb();
+        }
+        dispatch(receivePokemonById(null, json.data));
       })
   }
 }
