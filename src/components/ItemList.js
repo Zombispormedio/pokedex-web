@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react'
 
 import PokeItem from '../components/PokeItem'
 
+import Divider from '../components/Divider'
+
 import styles from '../theme/styles.scss';
 
 
@@ -9,7 +11,7 @@ const ItemList = ({items, onItemClick})=>{
     const list = items.map( p => (
         <div key={p.id.toString()}>
             <PokeItem pokemon={p} onClick={() => onItemClick(p.id)}/>
-            <div className={styles.divider}></div>
+            <Divider/>
         </div>
     ))
     return (

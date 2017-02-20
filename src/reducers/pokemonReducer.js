@@ -1,5 +1,4 @@
-import {REQUEST_POKEMONS, RECEIVE_POKEMONS,
-   REQUEST_FAV_POKEMON, RECEIVE_FAV_POKEMON} from '../config/actionTypes'
+import {REQUEST_POKEMONS, RECEIVE_POKEMONS, REQUEST_FAV_POKEMON, RECEIVE_FAV_POKEMON} from '../config/actionTypes'
 import {createReducer, mergeArrays, updateArrayByCallback, updateArrayByItem, orderByFav} from './reducerUtils'
 
 const initState = {

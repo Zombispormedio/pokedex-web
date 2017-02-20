@@ -1,7 +1,4 @@
-import {
-  REQUEST_POKEMONS,
-  RECEIVE_POKEMONS
-} from '../config/actionTypes'
+import { REQUEST_POKEMONS,RECEIVE_POKEMONS} from '../config/actionTypes'
 import Api from '../config/Api'
 
 const scope = "pokemons"

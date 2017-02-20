@@ -1,17 +1,18 @@
 import React, {PropTypes} from 'react'
 import {connect} from 'react-redux'
 
-import {ProgressBar, FontIcon} from 'react-toolbox';
+import {ProgressBar} from 'react-toolbox';
+
+import PokeIcon from '../components/PokeIcon';
 
 import styles from '../theme/styles.scss';
 
 const Loader =({isFetching})=>{
-        if(isFetching){
-            return <ProgressBar className={styles.bottomList} type="circular" mode="indeterminate" multicolor  />
-        }else{
-           return <div className={styles.bottomList}> <FontIcon value='airline_seat_individual_suite' /></div>
-        }
-    
+  if(isFetching){
+    return <ProgressBar className={styles.bottomList} type="circular" mode="indeterminate" multicolor  />
+  }else{
+    return <div className={styles.bottomList}><PokeIcon/></div>
+  }
 }
 
 function mapStateToProps(state) {
