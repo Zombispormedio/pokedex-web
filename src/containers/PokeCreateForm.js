@@ -55,7 +55,9 @@ const mapDispatchToProps = (dispatch) => {
 
 PokeCreateForm.propTypes = {
     createPokemon: PropTypes.func,
-    onFinish: PropTypes.func
+    onFinish: PropTypes.func,
+    isSubmiting: PropTypes.bool, 
+    isSubmited: PropTypes.bool
 };
 
 

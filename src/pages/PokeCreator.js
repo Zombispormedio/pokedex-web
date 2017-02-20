@@ -6,7 +6,6 @@ import {Panel, AppBar} from 'react-toolbox';
 import LayoutContent from '../components/LayoutContent'
 
 import PokeCreateForm from '../containers/PokeCreateForm'
-import Loader from '../containers/Loader'
 
 import styles from '../theme/styles.scss';
 

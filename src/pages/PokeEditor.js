@@ -5,19 +5,30 @@ import {Panel, AppBar} from 'react-toolbox';
 
 import LayoutContent from '../components/LayoutContent'
 
+import PokeUpdateForm from '../containers/PokeUpdateForm'
+
 import styles from '../theme/styles.scss';
 
 class PokeEditor extends Component{
-     goHome(){
+    constructor(props){
+        super(props)
+        this.goHome = this.goHome.bind(this)
+        this.goProfile = this.goProfile.bind(this)
+    }
+     goProfile(){
         browserHistory.push(`/pokemon/${this.props.params.id}`)
     }
+    goHome(){
+        browserHistory.push("/")
+    }
     render(){
-        const goHome = this.goHome.bind(this)
+        const {params} = this.props
         return (
        <Panel>
-           <AppBar className={styles.childToolbar} title='Editar Pokémon' leftIcon="chevron_left" onLeftIconClick={goHome} fixed/>
+           <AppBar className={styles.childToolbar} title='Editar Pokémon' 
+           leftIcon="chevron_left" onLeftIconClick={this.goProfile} fixed/>
             <LayoutContent>
-
+            <PokeUpdateForm id={params.id} onFinish={this.goProfile} notFound={this.goHome}/>
             </LayoutContent>
           </Panel>
         )

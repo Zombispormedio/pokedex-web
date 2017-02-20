@@ -12,13 +12,16 @@ class TypesDropdown extends Component{
      constructor(props){
         super(props)
         this.initialSource = [{label: "Ningún tipo", value: 0}]
+        this.state = this.fetchValues()
+     }
 
-        const {values} = props
-        this.state = values.reduce((memo, item)=>{
+    fetchValues(){
+        const {values} = this.props
+        return values.reduce((memo, item)=>{
             return {...memo,
-                 ["value"+item.ref]: item.value
+                 [item.ref]: item.value
                 }
-        }, {});
+        }, {})
     }
 
     componentDidMount() {
@@ -28,9 +31,12 @@ class TypesDropdown extends Component{
         }
     }
 
+    componentWillReceiveProps(){
+        this.setState(this.fetchValues())
+    }
+
     render(){
         const {isFetching, values, items} = this.props
-    
         let elem = void 0;
         if(items.length == 0 && isFetching){
             elem = <ProgressBar type="circular" mode="indeterminate" multicolor  />

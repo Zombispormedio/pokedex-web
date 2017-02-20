@@ -13,23 +13,30 @@ class PokeForm extends Component{
         super(props)
      
         this.handleSubmit = this.handleSubmit.bind(this);
-        let dropDownValues = ["type1","type2"].map((key, index) => {
+
+        this.state = {...props.model, dropDownValues: this.buildDropdown(), errors: {}}
+
+        this.handleName = this.handleChange.bind(this, 'name')
+        this.handleDescription = this.handleChange.bind(this, 'description')
+        this.handleEvolution = this.handleChange.bind(this, 'evolution')
+    }
+
+    componentWillReceiveProps(){
+        this.setState(this.buildDropdown())
+    }
+
+    buildDropdown(){
+        return ["type1","type2"].map((key, index) => {
             return {
                 ref: key,
                 label: "Elige tipo "+(index+1), 
-                value: this.props[key],
+                value: this.props.model[key]||0,
                 handler: (value) =>{
                     this.handleChange(key, value)
                 }, 
                 required: key == "type1"
             }
         })
-
-        this.state = {...props.model, dropDownValues, errors: {}}
-
-        this.handleName = this.handleChange.bind(this, 'name')
-        this.handleDescription = this.handleChange.bind(this, 'description')
-        this.handleEvolution = this.handleChange.bind(this, 'evolution')
     }
 
     handleChange(name, value) {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 
 import { browserHistory } from 'react-router'
@@ -46,20 +46,22 @@ class PokeProfile extends Component{
                <ProgressBar type="circular" mode="indeterminate" multicolor  />
             </LayoutContent>)
         }else{
-            const item = findById(items, params.id);
+            this.item = findById(items, params.id);
              return (
             <LayoutContent>
-                <PokemonProfile pokemon={item}/>
+                <PokemonProfile pokemon={this.item}/>
                 <FloatingActionButton icon="edit" onClick={this.goToUpdate}/>
             </LayoutContent>)
         }
     }
     render(){
+        const content = this.getContent();
         return (
             <Panel>
-                <AppBar className={styles.childToolbar} title="Pokémon's Profile" 
+                <AppBar className={styles.childToolbar} title={this.item!= void 0? 
+                    `Perfil de ${this.item.name}`: 'Esperando perfil del Pokémon...'} 
                     leftIcon="chevron_left" onLeftIconClick={this.goHome} fixed/>
-               {this.getContent()} 
+               {content} 
             </Panel>
         )
     }
@@ -77,6 +79,13 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 }
+
+PokeProfile.propTypes = {
+    fetchPokemonById: PropTypes.func,
+    items: PropTypes.arrayOf(PropTypes.object),
+    isFetching: PropTypes.bool
+};
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokeProfile)
