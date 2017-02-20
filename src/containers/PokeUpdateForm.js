@@ -6,7 +6,7 @@ import {ProgressBar} from 'react-toolbox';
 import PokeForm from '../components/PokeForm'
 import {fetchPokemonById, updatePokemon} from '../actions/pokemonActions'
 
-import {findById} from '../lib/utils'
+import {findById, diff} from '../lib/utils'
 
 class PokeUpdateForm extends Component {
     constructor(props) {
@@ -23,15 +23,19 @@ class PokeUpdateForm extends Component {
     }
 
     onSubmit(data){
-        this.model = {...data}
         const {id, updatePokemon, onFinish} = this.props
-        updatePokemon(id, data, onFinish)
+        if(diff(this.model, data, ["name", "description", "evolution", "type1", "type2" ])){
+            this.model = {...data}
+            updatePokemon(id, data, onFinish)
+        }else{
+            onFinish()
+        }
     }
 
     render() {
-        const { isSubmiting, isSubmited, isFetching, items, id} = this.props
+        const { isSubmiting, isSubmited, isFetching, isRemoving, items, id} = this.props
         const item = findById(items, id);
-        if((isSubmiting && !isSubmited) || isFetching || item == void 0){
+        if((isSubmiting && !isSubmited) || isFetching || item == void 0 || isRemoving){
             return <ProgressBar type="circular" mode="indeterminate" multicolor/>
         }else{
             this.model = {...item, type1: item.type1.id, type2: item.type2.id}
@@ -43,8 +47,8 @@ class PokeUpdateForm extends Component {
 
 
 const mapStateToProps = (state) => {
-    const {isSubmiting, isSubmited, isFetching, items} = state.pokemons
-    return {isSubmiting, isSubmited, isFetching, items}
+    const {isSubmiting, isSubmited, isFetching, isRemoving, items} = state.pokemons
+    return {isSubmiting, isSubmited, isFetching, isRemoving, items}
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -66,6 +70,7 @@ PokeUpdateForm.propTypes = {
     notFound: PropTypes.func,
     isSubmiting: PropTypes.bool, 
     isSubmited: PropTypes.bool, 
+    isRemoving: PropTypes.bool, 
     items: PropTypes.arrayOf(PropTypes.object),
     fetchPokemonById: PropTypes.func
 };

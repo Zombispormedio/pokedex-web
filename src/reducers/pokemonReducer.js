@@ -8,13 +8,16 @@ import {
   REQUEST_SHOW_POKEMON,
   RECEIVE_SHOW_POKEMON,
   REQUEST_UPDATE_POKEMON,
-  RECEIVE_UPDATE_POKEMON
+  RECEIVE_UPDATE_POKEMON,
+  REQUEST_DELETE_POKEMON,
+  RECEIVE_DELETE_POKEMON
 } from '../config/actionTypes'
 import {
   createReducer,
   mergeArrays,
   updateArrayByCallback,
-  updateArrayByItem
+  updateArrayByItem,
+  removeItemById
 } from '../lib/reducerUtils'
 
 const initState = {
@@ -22,7 +25,8 @@ const initState = {
   items: [],
   page: 0,
   isSubmiting: false,
-  isSubmited: false
+  isSubmited: false,
+  isRemoving: false
 }
 
 function requestPokemons(state) {
@@ -132,6 +136,20 @@ function receiveUpdatePokemon(state, {
   }
 }
 
+function requestDeletePokemon(state){
+  return { ...state,
+    isRemoving: true
+  }
+}
+
+function receiveDeletePokemon(state, {id}){
+  return { ...state,
+    isRemoving: false,
+    items: removeItemById(state.items, Number(id))
+  }
+}
+
+
 
 const pokemonReducer = createReducer(initState, {
   [REQUEST_POKEMONS]: requestPokemons,
@@ -144,6 +162,8 @@ const pokemonReducer = createReducer(initState, {
   [RECEIVE_SHOW_POKEMON]: receiveShowPokemon,
   [REQUEST_UPDATE_POKEMON]: requestUpdatePokemon,
   [RECEIVE_UPDATE_POKEMON]: receiveUpdatePokemon,
+  [REQUEST_DELETE_POKEMON]: requestDeletePokemon,
+  [RECEIVE_DELETE_POKEMON]: receiveDeletePokemon,
 })
 
 export default pokemonReducer

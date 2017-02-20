@@ -6,7 +6,9 @@ import {
   REQUEST_POKEMONS,
   RECEIVE_POKEMONS,
   REQUEST_SHOW_POKEMON,
-  RECEIVE_SHOW_POKEMON
+  RECEIVE_SHOW_POKEMON,
+  REQUEST_DELETE_POKEMON,
+  RECEIVE_DELETE_POKEMON
 } from '../config/actionTypes'
 import Api from '../config/Api'
 import {showSnackbar} from './snackbarActions'
@@ -150,6 +152,34 @@ export function updatePokemon(id, pokemon, callback) {
           return handleUpdateError(dispatch, json);
         }
         dispatch(receiveUpdatePokemon(json.data));
+        if (callback != void 0) {
+            callback()
+        }
+      })
+  }
+}
+
+
+function requestDeletePokemon(id) {
+  return {
+    type: REQUEST_DELETE_POKEMON,
+    id
+  }
+}
+
+function receiveDeletePokemon(id) {
+  return {
+    type: RECEIVE_DELETE_POKEMON,
+    id
+  }
+}
+
+export function deletePokemon(id, callback) {
+  return dispatch => {
+    dispatch(requestDeletePokemon(id))
+    return Api.del(`${scope}/${id}`)
+      .then(() => {
+        dispatch(receiveDeletePokemon(id));
         if (callback != void 0) {
             callback()
         }

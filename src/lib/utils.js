@@ -63,3 +63,7 @@ export function generateValidationMessage(errors) {
     return `Tipos ${errors.name[0]}`
   }
 }
+
+export function diff(model, data, keys){
+    return keys.reduce((memo, key)=>memo || model[key] != data[key], false)
+}

@@ -1,4 +1,4 @@
-import {findIndex, update, propEq, merge} from 'ramda'
+import {findIndex, update, propEq, merge, remove} from 'ramda'
 
 export function createReducer(initialState, handlers){
     return function reducer(state=initialState, action){
@@ -38,4 +38,11 @@ export function mergeArrays(array, values) {
         memo.push(item)
         return memo
     }, array)
+}
+
+export function removeItemById(array, itemId){
+    const index = findIndex(propEq("id", itemId))(array)
+    let result =remove(index, 1, array)
+    console.log(result)
+    return result
 }

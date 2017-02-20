@@ -71,9 +71,13 @@
 }
 
 .child-toolbar {
-    button span {
-        font-size: 4rem !important;
-    }
+    button{
+        height: 5rem;
+        width: 5rem;
+        span {
+        font-size: 3rem !important;
+        }
+    } 
 }
 
 .divider {
@@ -149,4 +153,10 @@
 .types {
     padding: 1.5rem;
     color: white;
+}
+
+.delete-button{
+    height: 5rem;
+    width: 5rem;
+    color: white !important;
 }
