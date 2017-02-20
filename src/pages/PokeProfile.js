@@ -9,7 +9,7 @@ import LayoutContent from '../components/LayoutContent'
 import FloatingActionButton from '../components/FloatingActionButton'
 import PokemonProfile from '../components/PokemonProfile'
 
-import {fetchPokemonById} from '../actions/loadPokemonAction'
+import {fetchPokemonById} from '../actions/pokemonActions'
 
 import styles from '../theme/styles.scss';
 import {findById} from '../lib/utils'

@@ -6,7 +6,9 @@ import {
   REQUEST_CREATE_POKEMON,
   RECEIVE_CREATE_POKEMON,
   REQUEST_SHOW_POKEMON,
-  RECEIVE_SHOW_POKEMON
+  RECEIVE_SHOW_POKEMON,
+  REQUEST_UPDATE_POKEMON,
+  RECEIVE_UPDATE_POKEMON
 } from '../config/actionTypes'
 import {
   createReducer,
@@ -92,9 +94,9 @@ function requestShowPokemon(state) {
 
 function receiveShowPokemon(state, {
   pokemon,
-  error
+  notFound
 }) {
-  if (error == void 0) {
+  if (!notFound) {
     return { ...state,
       isFetching: false,
       items: mergeArrays(state.items, [pokemon])
@@ -104,7 +106,30 @@ function receiveShowPokemon(state, {
       isFetching: false
     }
   }
+}
 
+function requestUpdatePokemon(state) {
+  return { ...state,
+    isSubmiting: true,
+    isSubmited: false
+  }
+}
+
+function receiveUpdatePokemon(state, {
+  pokemon,
+  validated
+}) {
+  if (validated) {
+    return { ...state,
+      isSubmiting: false,
+      isSubmited: true,
+      items: mergeArrays(state.items, [pokemon])
+    }
+  } else {
+    return { ...state,
+      isSubmiting: false
+    }
+  }
 }
 
 
@@ -117,6 +142,8 @@ const pokemonReducer = createReducer(initState, {
   [RECEIVE_CREATE_POKEMON]: receiveCreatePokemon,
   [REQUEST_SHOW_POKEMON]: requestShowPokemon,
   [RECEIVE_SHOW_POKEMON]: receiveShowPokemon,
+  [REQUEST_UPDATE_POKEMON]: requestUpdatePokemon,
+  [RECEIVE_UPDATE_POKEMON]: receiveUpdatePokemon,
 })
 
 export default pokemonReducer

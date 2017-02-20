@@ -51,3 +51,15 @@ const colorPokemonType = {
 export function colorOfPokemonType(name) {
     return colorPokemonType[name]
 }
+
+export function generateValidationMessage(errors) {
+  if (errors.name != void 0) {
+    return `Nombre ${errors.name[0]}`
+  } else if (errors.description != void 0) {
+    return `Descripción ${errors.description[0]}`
+  } else if (errors.type_id) {
+    return `Tipo 1 ${errors.name[0]}`
+  } else if (errors.type) {
+    return `Tipos ${errors.name[0]}`
+  }
+}

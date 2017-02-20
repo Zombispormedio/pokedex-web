@@ -85,6 +85,7 @@ class PokeForm extends Component{
 
 
     render(){
+        const {labelSubmit} = this.props
         const {name, description, evolution, errors,  dropDownValues} = this.state
      return (
         <form className={styles.form} onSubmit={this.handleSubmit}>
@@ -95,7 +96,7 @@ class PokeForm extends Component{
             <TypesDropdown values={dropDownValues}/>
             <Input type='text' label='Evolución' value={evolution}
                 onChange={this.handleEvolution} />
-            <Button type='submit' label='Crear' raised accent/>
+            <Button type='submit' label={labelSubmit} raised accent/>
         </form>
         )
     }

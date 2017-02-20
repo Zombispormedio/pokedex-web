@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {IconButton} from 'react-toolbox';
 
-import {favPokemon} from '../actions/favAction'
+import {favPokemon} from '../actions/favActions'
 
 
 

@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {ProgressBar} from 'react-toolbox';
 
 import PokeForm from '../components/PokeForm'
-import {createPokemon} from '../actions/createPokemonAction'
+import {createPokemon} from '../actions/pokemonActions'
 
 class PokeCreateForm extends Component {
     constructor(props) {
@@ -32,7 +32,7 @@ class PokeCreateForm extends Component {
         if(isSubmiting && !isSubmited){
             return <ProgressBar type="circular" mode="indeterminate" multicolor  />
         }else{
-            return <PokeForm model={this.model} onSubmit={this.onSubmit}/>
+            return <PokeForm model={this.model} onSubmit={this.onSubmit} labelSubmit="Crear"/>
         }
     
     }

@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react'
 import {connect} from 'react-redux'
 
-import {fetchPokemons} from '../actions/loadPokemonAction'
+import {fetchPokemons} from '../actions/pokemonActions'
 
 import ItemList from '../components/ItemList'
 

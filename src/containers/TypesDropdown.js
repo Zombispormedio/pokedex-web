@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {Dropdown, ProgressBar} from 'react-toolbox'
 
-import {fetchTypes} from '../actions/loadTypesAction'
+import {fetchTypes} from '../actions/typesActions'
 
 import styles from '../theme/styles.scss';
 

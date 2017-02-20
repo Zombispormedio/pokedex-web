@@ -26,7 +26,7 @@ class PokeEditor extends Component{
         return (
        <Panel>
            <AppBar className={styles.childToolbar} title='Editar Pokémon' 
-           leftIcon="chevron_left" onLeftIconClick={this.goProfile} fixed/>
+           leftIcon="chevron_left" onLeftIconClick={this.goProfile} fixed rightIcon="trash"/>
             <LayoutContent>
             <PokeUpdateForm id={params.id} onFinish={this.goProfile} notFound={this.goHome}/>
             </LayoutContent>

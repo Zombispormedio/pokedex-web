@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 import {Snackbar} from 'react-toolbox';
 
-import {closeSnackbar} from '../actions/snackbarAction'
+import {closeSnackbar} from '../actions/snackbarActions'
 
 class SnackbarAlertBox extends Component{
 

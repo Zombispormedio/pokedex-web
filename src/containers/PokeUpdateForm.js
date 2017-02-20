@@ -4,9 +4,8 @@ import {connect} from 'react-redux'
 import {ProgressBar} from 'react-toolbox';
 
 import PokeForm from '../components/PokeForm'
-import {fetchPokemonById} from '../actions/loadPokemonAction'
+import {fetchPokemonById, updatePokemon} from '../actions/pokemonActions'
 
-import styles from '../theme/styles.scss';
 import {findById} from '../lib/utils'
 
 class PokeUpdateForm extends Component {
@@ -17,14 +16,16 @@ class PokeUpdateForm extends Component {
 
     componentDidMount() {
         const {id, fetchPokemonById, items, notFound} = this.props
-        const item = findById(items, id);
+        const item= findById(items, id);
         if(item == void 0){
             fetchPokemonById(id, notFound)
         }
     }
 
     onSubmit(data){
-        
+        this.model = {...data}
+        const {id, updatePokemon, onFinish} = this.props
+        updatePokemon(id, data, onFinish)
     }
 
     render() {
@@ -33,9 +34,8 @@ class PokeUpdateForm extends Component {
         if((isSubmiting && !isSubmited) || isFetching || item == void 0){
             return <ProgressBar type="circular" mode="indeterminate" multicolor/>
         }else{
-            const model = {...item, type1: item.type1.id, type2: item.type2.id}
-            console.log(model)
-            return <PokeForm model={model} onSubmit={this.onSubmit}/>
+            this.model = {...item, type1: item.type1.id, type2: item.type2.id}
+            return <PokeForm model={this.model} onSubmit={this.onSubmit} labelSubmit="Actualizar"/>
         }
     
     }
@@ -49,9 +49,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-       /* updatePokemon: (id, data, cb) => {
+        updatePokemon: (id, data, cb) => {
             dispatch(updatePokemon(id, data, cb))
-        },*/
+        },
         fetchPokemonById: (id, errorCb) =>{
             dispatch(fetchPokemonById(id, errorCb))
         }
