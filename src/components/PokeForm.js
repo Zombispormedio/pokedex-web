@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 
-import {Input, Button} from 'react-toolbox'
+import {Input, Button, Card} from 'react-toolbox'
 
 import TypesDropdown from '../containers/TypesDropdown'
 
@@ -83,11 +83,11 @@ class PokeForm extends Component{
         <form className={styles.form} onSubmit={this.handleSubmit}>
             <Input type='text' label='Nombre' value={name} error={errors.name}
                 onChange={this.handleName} maxLength={24} required/>
-            <Input type='text' label='Descripción' value={description} error={errors.description}
+            <Input type='text' label='Descripción'rows={6} value={description} error={errors.description}
                 onChange={this.handleDescription} multiline required />
+            <TypesDropdown values={dropDownValues}/>
             <Input type='text' label='Evolución' value={evolution}
                 onChange={this.handleEvolution} />
-            <TypesDropdown values={dropDownValues}/>
             <Button type='submit' label='Crear' raised accent/>
         </form>
         )

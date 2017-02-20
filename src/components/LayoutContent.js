@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '../theme/styles.scss';
 
 const LayoutContent = (props)=>(
-    <div className={styles.content}>
+    <div className={`${styles.content} ${props.className}`}>
         {props.children}
     </div>
 )

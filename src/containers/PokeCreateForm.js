@@ -1,27 +1,39 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 
-import PokeForm from '../components/PokeForm'
 import {ProgressBar} from 'react-toolbox';
+
+import PokeForm from '../components/PokeForm'
+import {createPokemon} from '../actions/createPokemonAction'
 
 class PokeCreateForm extends Component {
     constructor(props) {
         super(props);
-        this.model = {
+        this.initialModel = {
             name: '',
             description: '',
             type1: 0,
             type2: 0,
             evolution: ''
         }
+        this.model = {...this.initialModel}
+        this.onSubmit = this.onSubmit.bind(this)
+    }
+
+    onSubmit(data){
+        this.model = {...data}
+        const {createPokemon, onFinish} = this.props;
+        console.log(onFinish)
+        createPokemon(data, onFinish)
     }
 
     render() {
-        const {createPokemon, isSubmitting} = this.props
-        if(isSubmitting){
+        const { isSubmiting, isSubmited} = this.props
+
+        if(isSubmiting && !isSubmited){
             return <ProgressBar type="circular" mode="indeterminate" multicolor  />
         }else{
-            return <PokeForm model={this.model} onSubmit={createPokemon}/>
+            return <PokeForm model={this.model} onSubmit={this.onSubmit}/>
         }
     
     }
@@ -29,14 +41,14 @@ class PokeCreateForm extends Component {
 
 
 const mapStateToProps = (state) => {
-    const {isFetching} = state.pokemons
-    return {isFetching}
+    const {isSubmiting, isSubmited} = state.pokemons
+    return {isSubmiting, isSubmited}
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createPokemon: (data) => {
-            console.log(data)
+        createPokemon: (data, cb) => {
+            dispatch(createPokemon(data, cb))
         }
     }
 }
@@ -44,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
 
 PokeCreateForm.propTypes = {
     createPokemon: PropTypes.func,
-    enabled: PropTypes.bool
+    onFinish: PropTypes.func
 };
 
 

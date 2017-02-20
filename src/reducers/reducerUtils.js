@@ -1,4 +1,4 @@
-import {findIndex, update, propEq, merge, sortBy, ascend, prop, sortWith} from 'ramda'
+import {findIndex, update, propEq, merge} from 'ramda'
 
 export function createReducer(initialState, handlers){
     return function reducer(state=initialState, action){
@@ -18,6 +18,7 @@ export function updateArrayByCallback(array, itemId, transform){
 
 export function updateArrayByItem(array, item){
     const index = findIndex(propEq("id", item.id))(array)
+    
     return update(index, item, array)
 }
 
@@ -37,10 +38,4 @@ export function mergeArrays(array, values) {
         memo.push(item)
         return memo
     }, array)
-}
-
-export function orderByFav(list){
-    const fn = (item) => item.fav == true
-    const sorted = sortWith([ascend(prop('insertedAt')), ], list)
-    return sortBy( a => fn(a)? 1 : 2 , sorted)
 }

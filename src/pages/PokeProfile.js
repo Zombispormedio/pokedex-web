@@ -11,7 +11,11 @@ import styles from '../theme/styles.scss';
 
 
 class PokeProfile extends Component{
-     goHome(){
+
+    componentDidMount() {
+        console.log(this.props)
+    }
+    goHome(){
         browserHistory.push('/')
     }
     goToUpdate(){

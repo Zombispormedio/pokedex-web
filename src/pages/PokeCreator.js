@@ -13,7 +13,7 @@ import styles from '../theme/styles.scss';
 
 class PokeCreator extends Component{
     goHome(){
-        browserHistory.push('/')
+        return browserHistory.push('/')
     }
 
     render(){
@@ -22,7 +22,7 @@ class PokeCreator extends Component{
                 <AppBar className={styles.childToolbar} title='Añadir Pokémon' 
                     leftIcon="chevron_left" onLeftIconClick={this.goHome} fixed/>
                 <LayoutContent>
-                    <PokeCreateForm/>
+                    <PokeCreateForm onFinish={this.goHome}/>
                 </LayoutContent>
              </Panel>
         )

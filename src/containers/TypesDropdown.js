@@ -22,7 +22,10 @@ class TypesDropdown extends Component{
     }
 
     componentDidMount() {
-        this.props.fetchTypes();
+        const {items, fetchTypes} = this.props;
+        if(items.length == 0){
+            fetchTypes();
+        }
     }
 
     render(){
@@ -39,7 +42,7 @@ class TypesDropdown extends Component{
                     this.setState({[ref]: value})
                     handler(value)
                 }
-                return <Dropdown key={ref} auto source={source} error={error} required={required}
+                return <Dropdown key={ref} source={source} error={error} required={required}
                 value={this.state[ref]} label={label} onChange={onChange}/>
             })
             
