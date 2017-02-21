@@ -215,6 +215,9 @@
                 }
             }
         }
+        @media only screen and (max-width: 750px) {
+            width: 100%;
+        }
     }
     .toggle {
         margin-left: 5%;
@@ -225,5 +228,6 @@
     }
     @media only screen and (max-width: 750px) {
         width: 100%;
+        flex-direction: column;
     }
 }
