@@ -113,7 +113,7 @@ export function fetchPokemonById(id, errorCb) {
     return Api.get(`${scope}/${id}`)
       .then(json => {
         if (json.errors != void 0) {
-          dispatch(receivePokemonById(json.errors, json.data));
+          dispatch(receivePokemonById(json.errors, {}));
           return errorCb();
         }
         dispatch(receivePokemonById(json.data));

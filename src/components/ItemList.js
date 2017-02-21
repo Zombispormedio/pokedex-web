@@ -26,17 +26,7 @@ const ItemList = ({items, onItemClick})=>{
 function order(list){
     const time = (a) => new Date(a.insertedAt).getTime()
     const byDate = (a, b) => time(b) - time(a)
-    return list.sort((a, b)=>{
-        if(a.fav && b.fav){
-            return byDate(a, b);
-        }else if(a.fav){
-            return -1;
-        }else if(b.fav){
-            return 1;
-        }else{
-            return byDate(a, b);
-        }
-    })
+    return list.sort(byDate)
 }           
 
 ItemList.propTypes = {
