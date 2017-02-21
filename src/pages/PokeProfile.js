@@ -12,17 +12,19 @@ import PokemonProfile from '../components/PokemonProfile'
 import {fetchPokemonById} from '../actions/pokemonActions'
 
 import styles from '../theme/styles.scss';
-import {findById} from '../lib/utils'
+import {findById, buildQueryObject} from '../lib/utils'
 
 
 class PokeProfile extends Component{
 
     constructor(props){
         super(props)
-        this.goToUpdate = this.goToUpdate.bind(this);
+        this.goToUpdate = this.goToUpdate.bind(this)
+        this.goHome = this.goHome.bind(this)
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         const {params, fetchPokemonById, items} = this.props
         const item = findById(items, params.id);
         if(item == void 0){
@@ -32,7 +34,9 @@ class PokeProfile extends Component{
 
 
     goHome(){
-        browserHistory.push('/')
+        const {favourites, query} = this.props
+        const queryObject =  buildQueryObject({favourites, query})
+        browserHistory.push( { pathname: '/', query: queryObject})
     }
     goToUpdate(){
         browserHistory.push(`/pokemon/${this.props.params.id}/update`)
@@ -68,8 +72,8 @@ class PokeProfile extends Component{
 }
 
 function mapStateToProps(state) {
-  const {items, isFetching} = state.pokemons
-  return {items, isFetching}
+  const {items, isFetching, favourites, query} = state.pokemons
+  return {items, isFetching, favourites, query}
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -83,7 +87,9 @@ const mapDispatchToProps = (dispatch) => {
 PokeProfile.propTypes = {
     fetchPokemonById: PropTypes.func,
     items: PropTypes.arrayOf(PropTypes.object),
-    isFetching: PropTypes.bool
+    isFetching: PropTypes.bool,
+    favourites:  PropTypes.bool, 
+    query:  PropTypes.string
 };
 
 

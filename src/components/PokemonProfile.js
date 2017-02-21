@@ -27,6 +27,9 @@ const PokemonProfile = ({pokemon}) => {
     }
     type1Style.backgroundColor= colorOfPokemonType(type1.name)
 
+    const evolutionContent= evolution != void 0 && evolution.length > 0 ? 
+                            `Evoluciona a ${evolution}`: "No evoluciona"
+
     return (
         <div className={styles.profile}> 
               <Avatar {...avatarData}/>
@@ -38,7 +41,7 @@ const PokemonProfile = ({pokemon}) => {
               </div>
               {type2Div}
             </div>
-            <span className={styles.profileEvolution} >{evolution!=void 0? `Evoluciona a ${evolution}`: "No evoluciona"}</span>
+            <span className={styles.profileEvolution} >{evolutionContent}</span>
             <p className={styles.profileDescription} >{description}</p>
 
         </div>

@@ -9,23 +9,37 @@ class PokeList extends Component{
     
     componentDidMount() {
         this.setupInfinityScroll();
-        this.loadMore();
+        this.loadFirst();
+    }
+    componentWillUnmount(){
+        this.removeInfinityScroll()
     }
 
     setupInfinityScroll(){
           const loadMore = this.loadMore.bind(this)
-          window.onscroll = function(){
+           this.scrollListener = ()=>{
             let scrollTop = document.body.scrollTop
             let limit = document.body.scrollHeight - window.innerHeight
             if(scrollTop == limit){
                 loadMore()
             }
-        };
+        }
+
+        window.addEventListener("scroll", this.scrollListener)
+    }
+
+    removeInfinityScroll(){
+        window.removeEventListener("scroll", this.scrollListener)
+    }
+
+    loadFirst(){
+        const {page, fetchPokemons, initial} = this.props;
+        fetchPokemons({page: page, query: initial.query, favourites: initial.favourites}, {clean: true});
     }
 
     loadMore(){
-        const {page, fetchPokemons} = this.props;
-        fetchPokemons(page+1);
+        const {page, fetchPokemons, query, favourites} = this.props;
+        fetchPokemons({page: page+1, query, favourites});
     }
 
     render(){
@@ -40,14 +54,14 @@ class PokeList extends Component{
 
 
 function mapStateToProps(state) {
-  const {items, page, isFetching} = state.pokemons
-  return { page, items, isFetching}
+  const {items, page, isFetching, query, favourites} = state.pokemons
+  return { page, items, isFetching, query, favourites}
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPokemons: (page) =>{
-        dispatch(fetchPokemons(page))
+    fetchPokemons: (query, opts) =>{
+        dispatch(fetchPokemons(query, opts))
     }
   }
 }
@@ -57,7 +71,11 @@ PokeList.propTypes = {
   fetchPokemons: PropTypes.func,
   items: PropTypes.arrayOf(React.PropTypes.object),
   page: PropTypes.number,
-  isFetching: PropTypes.bool
+  isFetching: PropTypes.bool,
+  initial: PropTypes.shape({
+      query: PropTypes.string,
+      favourites: PropTypes.bool
+  })
 };
 
 

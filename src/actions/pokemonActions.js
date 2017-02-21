@@ -12,7 +12,7 @@ import {
 } from '../config/actionTypes'
 import Api from '../config/Api'
 import {showSnackbar} from './snackbarActions'
-import {generateValidationMessage} from '../lib/utils'
+import {generateValidationMessage, buildQueryPath} from '../lib/utils'
 
 const scope = "pokemons"
 
@@ -57,31 +57,33 @@ export function createPokemon(pokemon, callback) {
   }
 }
 
-function requestPokemons(page) {
+function requestPokemons(opts) {
   return {
     type: REQUEST_POKEMONS,
-    page
+    ...opts
   }
 }
 
-function nextPokemons(page, json) {
+function nextPokemons(opts, json) {
   return {
     type: RECEIVE_POKEMONS,
-    page,
+    ...opts,
     pokemons: json.data,
     receivedAt: Date.now()
   }
 }
 
-export function fetchPokemons(page) {
+export function fetchPokemons(query, opts ={}) {
   return dispatch => {
-    dispatch(requestPokemons(page))
-    return Api.get(`${scope}?p=${page}`)
+    dispatch(requestPokemons(opts))
+    const queryPath = buildQueryPath(query);
+
+    return Api.get(`${scope}?${queryPath}`)
       .then(json => {
-        dispatch(nextPokemons(page, json));
+        dispatch(nextPokemons({...query, opts}, json));
       })
       .catch(() => {
-        dispatch(nextPokemons(page, {
+        dispatch(nextPokemons(query, {
           data: []
         }));
       })
@@ -186,3 +188,4 @@ export function deletePokemon(id, callback) {
       })
   }
 }
+

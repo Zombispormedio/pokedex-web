@@ -15,7 +15,7 @@ const PokeFavButton =({fav, pokemonId,  favPokemon, className})=>{
     return  <IconButton className={className} 
     icon='favorite' 
     onClick={()=>{
-      setTimeout(() => favPokemon(pokemonId), 1000)
+      setTimeout(() => favPokemon(pokemonId), 500)
     }
     }
     style={{color: color}} />

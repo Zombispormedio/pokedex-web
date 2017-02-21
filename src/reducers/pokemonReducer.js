@@ -23,7 +23,9 @@ import {
 const initState = {
   isFetching: false,
   items: [],
-  page: 0,
+  page: 1,
+  query: "",
+  favourites: false,
   isSubmiting: false,
   isSubmited: false,
   isRemoving: false
@@ -37,12 +39,26 @@ function requestPokemons(state) {
 
 function receivePokemons(state, {
   pokemons,
-  page
+  page,
+  query,
+  favourites,
+  opts
 }) {
+
+  let data = opts.clean ? {
+      items: pokemons,
+      page: 1
+    } :
+    {
+      items: mergeArrays(state.items, pokemons),
+      page: (pokemons.length == 0 ? state.page : page)
+    }
+
   return { ...state,
     isFetching: false,
-    items: mergeArrays(state.items, pokemons),
-    page: pokemons.length == 0 ? state.page : page
+    ...data,
+    query,
+    favourites
   }
 }
 
@@ -136,19 +152,20 @@ function receiveUpdatePokemon(state, {
   }
 }
 
-function requestDeletePokemon(state){
+function requestDeletePokemon(state) {
   return { ...state,
     isRemoving: true
   }
 }
 
-function receiveDeletePokemon(state, {id}){
+function receiveDeletePokemon(state, {
+  id
+}) {
   return { ...state,
     isRemoving: false,
     items: removeItemById(state.items, Number(id))
   }
 }
-
 
 
 const pokemonReducer = createReducer(initState, {
@@ -163,7 +180,7 @@ const pokemonReducer = createReducer(initState, {
   [REQUEST_UPDATE_POKEMON]: requestUpdatePokemon,
   [RECEIVE_UPDATE_POKEMON]: receiveUpdatePokemon,
   [REQUEST_DELETE_POKEMON]: requestDeletePokemon,
-  [RECEIVE_DELETE_POKEMON]: receiveDeletePokemon,
+  [RECEIVE_DELETE_POKEMON]: receiveDeletePokemon
 })
 
 export default pokemonReducer

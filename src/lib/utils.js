@@ -67,3 +67,58 @@ export function generateValidationMessage(errors) {
 export function diff(model, data, keys){
     return keys.reduce((memo, key)=>memo || model[key] != data[key], false)
 }
+
+
+export function buildQuery(previous, tuple, opts){
+    const set = new Set(Object.keys(previous))
+    set.add(tuple.key)
+    const memo = {}
+    set.forEach((k)=>{
+      let v = previous[k]
+      const target = k == tuple.key
+      if(target){
+        v = tuple.value
+      }
+
+      if((target && !opts.remove) || !target ){
+        memo[k] = v
+      }
+      
+    })
+    return memo
+}
+
+const translate = {
+    page:"p",
+    query: "q",
+    favourites:"f"
+}
+
+export function buildQueryPath(opts){
+    return Object.keys(opts).reduce((memo, key) =>{
+        let value = opts[key]
+        if(value !== false){
+            if(value === true){
+                value = ""
+            }
+            memo.push(`${translate[key]}=${value}`)
+        }
+
+        return memo;
+    }, [])
+    .join("&")
+}
+
+export function buildQueryObject(opts){
+    return Object.keys(opts).reduce((memo, key) =>{
+        let value = opts[key]
+        if(value !== false){
+            if(value === true){
+                value = ""
+            }
+           memo[translate[key]] = value
+        }
+
+        return memo;
+    }, {})
+}
