@@ -33,7 +33,7 @@ const getHeaders = () => {
 
 const saveAuthorization = (headers) => {
     if (headers.has("Authorization")) {
-        localStorage.authorization = headers.get("Authorization")
+        localStorage.authorization = headers.get("authorization")
     }
 }
 
