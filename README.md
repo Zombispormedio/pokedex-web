@@ -1,5 +1,7 @@
 # Pokedex App
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Zombispormedio/pokedex_app.svg)](https://greenkeeper.io/)
+
 Frontend created with React, Redux and Webpack
 
 To start Pokedex App:
