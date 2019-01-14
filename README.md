@@ -1,6 +1,6 @@
 # Pokedex App
 
-Frontend created with React, Redux and Webpack
+First time with React, Redux and Webpack
 
 To start Pokedex App:
 
